@@ -1,12 +1,17 @@
-from django.urls import path, include
-from .api import RegisterAPI, LoginAPI, UserApi, CheckExistUserAPI
-from rest_framework.authtoken import views
+from django.urls import path, include, reverse
+from django.conf.urls import url
+from .views import (
+    ProfileView,
+    CheckExistUserAPI,
+    UserDetailsView,
+    UserApiRequest
+)
 
-app_name = "auth"
+app_name = 'api'
+
 urlpatterns = [
-    path('', include('knox.urls')),
-    path('register', RegisterAPI.as_view()),
-    path('login', LoginAPI.as_view()),
-    path('user', UserApi.as_view()),
-    path('checkExistUser', CheckExistUserAPI.as_view())
+    url(r'profile/', ProfileView.as_view(), name="profile"),
+    url(r'user/request/', UserApiRequest.as_view()),
+    url(r'user/', UserDetailsView.as_view()),
+    url(r'checkExistUser', CheckExistUserAPI.as_view()),
 ]

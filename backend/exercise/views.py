@@ -13,11 +13,11 @@ from rest_framework.status import (
 from rest_framework import viewsets, mixins
 from exercise.serializers import (
     ProgramSerializer,
-    ProfileSerializer
 )
 
 from accounts.serializers import (
     UserDetailsSerializer,
+    ProfileSerializer
 )
 
 from .models import Program
@@ -35,6 +35,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.middleware.csrf import get_token
 from django.db.models import Q
+from django.contrib.auth import get_user_model, authenticate
 
 
 class ProgramViewSet(viewsets.ModelViewSet):

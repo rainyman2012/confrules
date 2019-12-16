@@ -6,16 +6,10 @@ import { withRouter, Link, Redirect } from "react-router-dom";
 import {
   Row,
   Col,
-  Avatar,
-  Select,
-  Icon,
-  Steps,
-  Button,
-  message,
   Spin
 } from "antd";
-import { Lang as T } from "../languages";
-import "../stylesheets/dashboard.css";
+import { Lang as T } from "../../languages";
+import "../../stylesheets/dashboard.css";
 // const getWidth = () => {
 //   const isSSR = typeof window === "undefined";
 //   return isSSR ? Responsive.onlyTablet.minWidth : window.innerWidth;
@@ -94,27 +88,7 @@ class Dashboard extends Component {
 
     return (
       <React.Fragment>
-        <Row type="flex" justify="center">
-          <Col>
-            <Avatar
-              size={74}
-              // src={this.props.user.profile.image}
-              style={{ position: "center center'" }}
-            />
-            <hr />
-          </Col>
-        </Row>
-        <Row type="flex" justify="center">
-          <Col style={{ margin: "10px" }}>
-            <img
-              className="generalBtn"
-              width="200"
-              height="100"
-              onclick={this.handleGeneralSubmit}
-            />
-          </Col>
-          {/* {marriage_part} */}
-        </Row>
+        asdasdas
       </React.Fragment>
     );
   }

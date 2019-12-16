@@ -40,6 +40,13 @@ export const checkAuthTimeout = expirationTime => {
   };
 };
 
+export const authGetUserDetail = userData => {
+  return {
+    type: actionTypes.AUTH_GET_USER_DETAIL,
+    user: userData
+  };
+};
+
 export const authLogin = (username, password) => {
   return dispatch => {
     dispatch(authStart());
@@ -94,7 +101,7 @@ export const authProfile = (gender, lang, age, image, key) => {
   return dispatch => {
     axios
       .post(
-        `${HOSTNAME}/api/profile/`,
+        `${HOSTNAME}/auth/profile/`,
         {
           age: age,
           gender: gender,
@@ -110,6 +117,26 @@ export const authProfile = (gender, lang, age, image, key) => {
       .then(res => {
         const data = res.data;
         console.log(data);
+      })
+      .catch(err => {
+        dispatch(authFail(err));
+      });
+  };
+};
+
+
+export const getUserDetail = key => {
+  return dispatch => {
+    dispatch(authStart());
+    axios
+      .get(`${HOSTNAME}/api/user/`, {
+        headers: {
+          Authorization: "Token " + key
+        }
+      })
+      .then(res => {
+        const userData = res.data;
+        dispatch(authGetUserDetail(userData));
       })
       .catch(err => {
         dispatch(authFail(err));

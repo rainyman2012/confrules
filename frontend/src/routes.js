@@ -6,7 +6,7 @@ import Login from "./containers/Login";
 import SignUpForm from "./containers/signup";
 import ExerciseForm from "./containers/create";
 import HomepageLayout from "./containers/Home";
-import Dashboard from "./containers/dashboard";
+import Dashboard from "./containers/dashboard/dashboard";
 import ProtectRoute from "./ProtectRoute";
 const BaseRouter = () => (
   <Hoc>

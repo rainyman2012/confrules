@@ -4,7 +4,9 @@ import { updateObject } from "../utility";
 const initialState = {
   token: null,
   error: null,
-  loading: false
+  user: null,
+  loading: false,
+  signUpCompleted: false
 };
 
 const authStart = (state, action) => {
@@ -17,6 +19,15 @@ const authStart = (state, action) => {
 const authSuccess = (state, action) => {
   return updateObject(state, {
     token: action.token,
+    error: null,
+    loading: false,
+    signUpCompleted: !!action.signUpCompleted
+  });
+};
+
+const authGetUserDetail = (state, action) => {
+  return updateObject(state, {
+    user: action.user,
     error: null,
     loading: false
   });
@@ -45,6 +56,8 @@ const reducer = (state = initialState, action) => {
       return authFail(state, action);
     case actionTypes.AUTH_LOGOUT:
       return authLogout(state, action);
+    case actionTypes.AUTH_GET_USER_DETAIL:
+      return authGetUserDetail(state, action);
     default:
       return state;
   }
