@@ -1,5 +1,6 @@
-import { Form, Select, Input, Button } from "antd";
+import { Form, Select, Row, Col, Button } from "antd";
 import React from "react";
+import "./DashForm.css";
 const { Option } = Select;
 
 class DashForm extends React.Component {
@@ -22,35 +23,32 @@ class DashForm extends React.Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
-      <Form
-        labelCol={{ span: 5 }}
-        wrapperCol={{ span: 12 }}
-        onSubmit={this.handleSubmit}
-      >
-        <Form.Item label="Note">
-          {getFieldDecorator("note", {
-            rules: [{ required: true, message: "Please input your note!" }]
-          })(<Input />)}
-        </Form.Item>
-        <Form.Item label="Gender">
-          {getFieldDecorator("gender", {
-            rules: [{ required: true, message: "Please select your gender!" }]
-          })(
-            <Select
-              placeholder="Select a option and change input text above"
-              onChange={this.handleSelectChange}
-            >
-              <Option value="male">male</Option>
-              <Option value="female">female</Option>
-            </Select>
-          )}
-        </Form.Item>
-        <Form.Item wrapperCol={{ span: 12, offset: 5 }}>
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-        </Form.Item>
-      </Form>
+      <Row type="flex" justify="center">
+        <Col span={12} style={{ textAlign: "center", direction: "ltr" }}>
+          <Form onSubmit={this.handleSubmit}>
+            <Form.Item>
+              {getFieldDecorator("laws", {
+                rules: [
+                  { required: true, message: "یکی از موارد را انتخاب کنید!" }
+                ]
+              })(
+                <Select
+                  placeholder="لطفا یکی از قوانین و مقاررات را انتخاب کنید."
+                  onChange={this.handleSelectChange}
+                >
+                  <Option value="mosavabat">مصوبات</Option>
+                  <Option value="shive">شیوه نامه‌ی حوضه ی ایرانیان</Option>
+                </Select>
+              )}
+            </Form.Item>
+            <Form.Item wrapperCol={{ span: 12, offset: 5 }}>
+              <Button type="primary" htmlType="submit">
+                Submit
+              </Button>
+            </Form.Item>
+          </Form>
+        </Col>
+      </Row>
     );
   }
 }
