@@ -124,7 +124,6 @@ export const authProfile = (gender, lang, age, image, key) => {
   };
 };
 
-
 export const getUserDetail = key => {
   return dispatch => {
     dispatch(authStart());

@@ -15,14 +15,21 @@ class HomepageLayout extends React.Component {
     console.log("language is ", this.props.language);
   }
 
-
   render() {
     const general_texts = T[this.props.language];
     console.log(general_texts);
 
     return (
-      <Row style={{ height: "100vh" }}>
-        <Col span={24} style={{ fontSize: "2em", position: "relative", top: "50%", textAlign: "center" }}>
+      <Row style={{ height: "100%" }}>
+        <Col
+          span={24}
+          style={{
+            fontSize: "2em",
+            position: "relative",
+            top: "50%",
+            textAlign: "center"
+          }}
+        >
           <h3>{general_texts.title}</h3>
         </Col>
       </Row>
@@ -48,8 +55,5 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(HomepageLayout)
+  connect(mapStateToProps, mapDispatchToProps)(HomepageLayout)
 );

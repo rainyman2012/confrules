@@ -60,21 +60,21 @@ class CustomLayout extends React.Component {
               </Menu>
             </React.Fragment>
           ) : (
-              <Menu
-                theme="dark"
-                mode="horizontal"
-                defaultSelectedKeys={["1"]}
-                style={{ lineHeight: "64px" }}
-              >
-                <Menu.Item key="3">
-                  <Link to="#" onClick={this.handleLogout}>
-                    {general_texts.logout}
-                  </Link>
-                </Menu.Item>
-              </Menu>
-            )}
+            <Menu
+              theme="dark"
+              mode="horizontal"
+              defaultSelectedKeys={["1"]}
+              style={{ lineHeight: "64px" }}
+            >
+              <Menu.Item key="3">
+                <Link to="#" onClick={this.handleLogout}>
+                  {general_texts.logout}
+                </Link>
+              </Menu.Item>
+            </Menu>
+          )}
         </Header>
-        <Content style={{ padding: "0 50px", marginTop: 64 }}>
+        <Content style={{ padding: "0 0px", marginTop: 64 }}>
           {this.props.children}
         </Content>
         <Footer style={{ textAlign: "center" }}>
@@ -101,8 +101,5 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(CustomLayout)
+  connect(mapStateToProps, mapDispatchToProps)(CustomLayout)
 );

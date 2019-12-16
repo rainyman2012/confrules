@@ -2,7 +2,7 @@ import React from "react";
 import { Route } from "react-router-dom";
 import Hoc from "./hoc/hoc";
 
-import Login from "./containers/Login";
+import Login from "./containers/Login/Login";
 import SignUpForm from "./containers/signup";
 import ExerciseForm from "./containers/create";
 import HomepageLayout from "./containers/Home";
@@ -17,7 +17,7 @@ const BaseRouter = () => (
     <Route exact path="/su/$uuid" component={HomepageLayout} />
     <ProtectRoute
       exact
-      path="/dashboard"
+      path="/dashboard/:page?"
       component={Dashboard}
     ></ProtectRoute>
   </Hoc>
