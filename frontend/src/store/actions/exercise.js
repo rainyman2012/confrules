@@ -2,6 +2,15 @@ import axios from "axios";
 import * as actionTypes from "./actionTypes";
 import { HOSTNAME } from "../../static";
 
+export const exerciseUpdateForm = (data) => {
+  console.log("this is data in action:", data);
+
+  return {
+    type: actionTypes.EXERCISE_UPDATE_FORM,
+    data: data
+  };
+};
+
 export const exerciseStart = () => {
   return {
     type: actionTypes.EXERCISE_START
@@ -43,6 +52,7 @@ export const setGAClientId = clientId => {
   };
 };
 
+
 export const exerciseCreate = (name, password) => {
   return dispatch => {
     dispatch(exerciseStart());
@@ -75,3 +85,9 @@ export const fetchData = uuid => {
       });
   };
 };
+
+export const addToForm = data => {
+  return dispatch => {
+    dispatch(exerciseUpdateForm(data))
+  };
+}

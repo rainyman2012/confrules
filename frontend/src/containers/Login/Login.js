@@ -46,21 +46,21 @@ class LoginForm extends React.Component {
             <Form.Item>
               {getFieldDecorator("username", {
                 rules: [
-                  { required: true, message: "Please input your username!" }
+                  { required: true, message: "لطفا نام کاربری خود را وارد کنید!" }
                 ]
               })(
                 <Input
                   prefix={
                     <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
                   }
-                  placeholder="Username"
+                  placeholder="نام کاربری"
                 />
               )}
             </Form.Item>
             <Form.Item>
               {getFieldDecorator("password", {
                 rules: [
-                  { required: true, message: "Please input your Password!" }
+                  { required: true, message: "پسورد" }
                 ]
               })(
                 <Input
@@ -68,7 +68,7 @@ class LoginForm extends React.Component {
                     <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
                   }
                   type="password"
-                  placeholder="Password"
+                  placeholder="پسورد"
                 />
               )}
             </Form.Item>
@@ -76,18 +76,16 @@ class LoginForm extends React.Component {
               {getFieldDecorator("remember", {
                 valuePropName: "checked",
                 initialValue: true
-              })(<Checkbox>Remember me</Checkbox>)}
-              <a className="login-form-forgot" href="">
-                Forgot password
-              </a>
+              })(<Checkbox>
+              </Checkbox>)}
               <Button
                 type="primary"
                 htmlType="submit"
                 className="login-form-button"
               >
-                Log in
+                ورود
               </Button>
-              Or <a href="">register now!</a>
+              یا <a href="/signup">ثبت نام کنید</a>
             </Form.Item>
           </Form>
         </Col>

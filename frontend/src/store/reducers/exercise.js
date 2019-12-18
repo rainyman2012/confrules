@@ -6,8 +6,16 @@ const initialState = {
   name: null,
   error: null,
   loading: false,
-  clientId: ""
+  clientId: "",
+  form: []
 };
+
+const exerciseUpdateForm = (state, action) => {
+  const tempform = state.form.push(action.data)
+  return updateObject(state, {
+    form: tempform
+  });
+}
 
 const exerciseStart = (state, action) => {
   return updateObject(state, {
@@ -55,6 +63,8 @@ const exerciseSetGAClientId = (state, action) => {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.EXERCISE_UPDATE_FORM:
+      return exerciseUpdateForm(state, action);
     case actionTypes.EXERCISE_START:
       return exerciseStart(state, action);
     case actionTypes.EXERCISE_SUCCESS:

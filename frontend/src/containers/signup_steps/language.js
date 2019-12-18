@@ -52,7 +52,7 @@ class LanguageForm extends React.Component {
               size="medium"
               onClick={this.continue}
             >
-              Continue
+              ادامه
             </Button>
           </Col>
         </Row>

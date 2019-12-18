@@ -1,22 +1,19 @@
 import { Form, Select, Row, Col, Button } from "antd";
 import React from "react";
-import "./DashForm.css";
+import { addToForm } from "../../../store/actions/exercise";
+import { connect } from "react-redux";
+
+import "./LawForm.css";
 const { Option } = Select;
 
-class DashForm extends React.Component {
+class LawForm extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
+        this.props.addToForm(values)
         console.log("Received values of form: ", values);
       }
-    });
-  };
-
-  handleSelectChange = value => {
-    console.log(value);
-    this.props.form.setFieldsValue({
-      note: `Hi, ${value === "male" ? "man" : "lady"}!`
     });
   };
 
@@ -36,14 +33,14 @@ class DashForm extends React.Component {
                   placeholder="لطفا یکی از قوانین و مقاررات را انتخاب کنید."
                   onChange={this.handleSelectChange}
                 >
-                  <Option value="mosavabat">مصوبات</Option>
-                  <Option value="shive">شیوه نامه‌ی حوضه ی ایرانیان</Option>
+                  <Option value="مصوبات">مصوبات</Option>
+                  <Option value="شیوه نامه‌ی حوضه ی ایرانیان">شیوه نامه‌ی حوضه ی ایرانیان</Option>
                 </Select>
               )}
             </Form.Item>
             <Form.Item wrapperCol={{ span: 12, offset: 5 }}>
               <Button type="primary" htmlType="submit">
-                Submit
+                تاید
               </Button>
             </Form.Item>
           </Form>
@@ -53,6 +50,25 @@ class DashForm extends React.Component {
   }
 }
 
-const WrappedApp = Form.create({ name: "coordinated" })(DashForm);
+const WrappedApp = Form.create({ name: "coordinated" })(LawForm);
 
-export default WrappedApp;
+const mapStateToProps = state => {
+  return {
+    loading: state.exercise.loading,
+    error: state.exercise.error,
+    uuid: state.exercise.uuid
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addToForm: (data) => dispatch(addToForm(data)),
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(WrappedApp);
+
+

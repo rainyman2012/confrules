@@ -175,12 +175,12 @@ class PersonalForm extends React.Component {
               rules: [
                 {
                   required: true,
-                  message: "Please select your gender!"
+                  message: "لطفا جنسیت خود را وارد کنید"
                 }
               ]
             })(
               <Select
-                placeholder="Select your gender"
+                placeholder="جنسیت"
                 onChange={this.handleSelectChange}
               >
                 <Option value="m">male</Option>
@@ -215,25 +215,25 @@ class PersonalForm extends React.Component {
                 </Upload.Dragger>
               )
             ) : (
-              <div style={{ textAlign: "center" }}>
-                <img
-                  id="yourImage"
-                  src={this.state.image}
-                  alt="your image"
-                  width="200px"
-                  height="200px"
-                />
-                <div>
-                  <Button
-                    type="danger"
-                    style={{ color: "white" }}
-                    onClick={this.handleDeleteImage}
-                  >
-                    delete
+                <div style={{ textAlign: "center" }}>
+                  <img
+                    id="yourImage"
+                    src={this.state.image}
+                    alt="your image"
+                    width="200px"
+                    height="200px"
+                  />
+                  <div>
+                    <Button
+                      type="danger"
+                      style={{ color: "white" }}
+                      onClick={this.handleDeleteImage}
+                    >
+                      delete
                   </Button>
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
           </Form.Item>
 
           <Form.Item

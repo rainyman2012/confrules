@@ -128,7 +128,7 @@ export const getUserDetail = key => {
   return dispatch => {
     dispatch(authStart());
     axios
-      .get(`${HOSTNAME}/api/user/`, {
+      .get(`${HOSTNAME}/auth/user/`, {
         headers: {
           Authorization: "Token " + key
         }

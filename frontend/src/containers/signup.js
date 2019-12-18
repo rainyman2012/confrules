@@ -14,7 +14,7 @@ const { Step } = Steps;
 
 class SignUpForm extends React.Component {
   state = {
-    language: "English",
+    language: "persian",
     username: "",
     password: "",
     email: "",
