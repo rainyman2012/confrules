@@ -6,7 +6,6 @@ from .views import (
     UserDetailsView,
     UserApiRequest
 )
-
 app_name = 'api'
 
 urlpatterns = [

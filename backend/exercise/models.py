@@ -20,33 +20,26 @@ class ProgramManager(models.Manager):
 
     def create(self, **kwargs):
         obj = super().create(**kwargs)
-        obj.password = pbkdf2_sha256.encrypt(
-            obj.password, rounds=12000, salt_size=32)
         obj.save()
         return obj
 
     def get_model_fields(self):
         return self.model._meta.fields
 
-    def get_exercise(self, _uuid):
-        return self.filter(uuid__exact=_uuid).first()
-
-    def verify_password(self, password, uuid):
-        obj = self.filter(uuid__iexact=uuid).first()
-        if obj:
-            return pbkdf2_sha256.verify(password, obj.password)
-        return False
-
 
 class Program(models.Model):
-    name = models.CharField(max_length=80)
-    uuid = models.CharField(max_length=32, blank=True,
-                            null=True, default=generate_uuid)
+    name = models.CharField(max_length=80, blank=True, default="")
+    law = models.CharField(max_length=100, blank=True, default="")
+    branch = models.CharField(max_length=100, blank=True, default="")
+    identify = models.BooleanField(null=True, blank=True, default="")
+    phone = models.CharField(max_length=20, blank=True, default="")
+    intro = models.TextField(blank=True, default="")
+
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, related_name='program',
         on_delete=models.CASCADE, null=True, blank=True
     )
-    password = models.CharField(max_length=256, default="1234")
+
     objects = ProgramManager()
 
     def __str__(self):

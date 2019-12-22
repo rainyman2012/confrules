@@ -23,23 +23,23 @@ from django.db.models import Q
 
 UserModel = get_user_model()
 
+
 class ProgramSerializer(serializers.ModelSerializer):
     user = UserDetailsSerializer(required=False)
 
     class Meta:
         model = Program
-        fields = ('id', 'name', 'uuid', 'user')
+        fields = ('id', 'name', 'identify', 'law', 'branch', 'phone', 'user')
         depth = 2  # we can set this to get all realation
         extra_kwargs = {
-            'password': {'write_only': True},
-            'uuid': {'read_only': True},
             'user': {'read_only': True},
         }
 
     # Default `create` and `update` behavior...
 
     def create(self, validated_data):
-        user = validated_data.pop('user')
+        if "user" in validated_data:
+            user = validated_data.pop('user')
         ModelClass = self.Meta.model
         instance = ModelClass._default_manager.create(
             user=self.context['request'].user, **validated_data)

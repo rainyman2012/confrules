@@ -19,4 +19,5 @@ router.register(r'program', ProgramViewSet, base_name="Program")
 
 urlpatterns += router.urls
 
-print(router.urls)
+for url in urlpatterns:
+    print(url)
