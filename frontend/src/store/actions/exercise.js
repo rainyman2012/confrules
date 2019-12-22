@@ -17,18 +17,17 @@ export const exerciseStart = () => {
   };
 };
 
-export const exerciseSuccess = uuid => {
+export const exerciseSuccess = data => {
   return {
     type: actionTypes.EXERCISE_SUCCESS,
-    uuid: uuid
+    form: data
   };
 };
 
 export const exerciseFetched = data => {
   return {
     type: actionTypes.EXERCISE_SUCCESS_FETCH,
-    name: data.name,
-    uuid: data.uuid
+    form: data,
   };
 };
 
@@ -52,18 +51,18 @@ export const setGAClientId = clientId => {
   };
 };
 
-
-export const exerciseCreate = (name, password) => {
+export const exerciseCreate = (token) => {
   return dispatch => {
     dispatch(exerciseStart());
     axios
-      .post(`${HOSTNAME}/api/`, {
-        name: name,
-        password: password
+      .post(`${HOSTNAME}/api/program/`, {}, {
+        headers: {
+          Authorization: "Token " + token
+        }
       })
       .then(res => {
         const data = res.data;
-        dispatch(exerciseSuccess(data["uuid"]));
+        dispatch(exerciseSuccess(data));
       })
       .catch(err => {
         dispatch(exerciseFail(err));
@@ -71,13 +70,18 @@ export const exerciseCreate = (name, password) => {
   };
 };
 
-export const fetchData = uuid => {
+export const fetchAllExerciseTable = (token, pk) => {
   return dispatch => {
     dispatch(exerciseStart());
     axios
-      .get(`${HOSTNAME}/api/${uuid}/`)
+      .get(`${HOSTNAME}/api/program/${pk}/`, {
+        headers: {
+          Authorization: "Token " + token
+        }
+      })
       .then(res => {
         const data = res.data;
+        console.log("whole pile of form data", data);
         dispatch(exerciseFetched(data));
       })
       .catch(err => {
@@ -86,8 +90,29 @@ export const fetchData = uuid => {
   };
 };
 
-export const addToForm = data => {
+export const updateUserExerciseTable = (data, token, pk) => {
   return dispatch => {
-    dispatch(exerciseUpdateForm(data))
+    dispatch(exerciseStart());
+    console.log("this is my pk", pk);
+
+    axios
+      .patch(
+        `${HOSTNAME}/api/program/${pk}/`, data,
+        {
+          headers: {
+            Authorization: "Token " + token
+          }
+        }
+      )
+      .then(res => {
+        const data = res.data;
+        console.log("these data have updated", data);
+        dispatch(exerciseUpdateForm(data))
+      })
+      .catch(err => {
+        dispatch(exerciseFail(err));
+      });
   };
+
+
 }

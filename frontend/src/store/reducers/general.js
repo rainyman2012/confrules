@@ -15,7 +15,6 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.GENERAL_LANGUAGE_SET:
       return generalLanguageSet(state, action);
-
     default:
       return state;
   }

@@ -3,7 +3,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter, Link, Redirect, Route } from "react-router-dom";
 import { getUserDetail } from "../../store/actions/auth";
-import { Row, Col, Spin, Avatar } from "antd";
+import { fetchAllExerciseTable } from "../../store/actions/exercise"
+import {
+  Spin, Avatar
+} from "antd";
 import { Layout, Menu, Icon } from "antd";
 import LawForm from "./LawForm/LawForm";
 import InfoForm from "./Info/InfoForm";
@@ -34,6 +37,7 @@ class Dashboard extends Component {
       console.log("user info", this.props.user)
 
       this.props.getUserDetail(this.props.token);
+      this.props.fetchAllExerciseTable(this.props.token, this.props.user.pk);
     }
   }
 
@@ -48,7 +52,7 @@ class Dashboard extends Component {
   componentSwitcher(param) {
     switch (param) {
       case "lawform":
-        return <LawForm />;
+        return <LawForm data={this.props.form} />;
       case "infoform":
         return <InfoForm />;
       default:
@@ -78,7 +82,7 @@ class Dashboard extends Component {
             <div className="logo" />
             <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
               <div style={{ textAlign: "center", marginTop: "10px" }}>
-                <Avatar size={75} />
+                <Avatar size={75} src={this.props.user.profile.image ? this.props.user.profile.image : null} />
                 <p>{this.props.user.email}</p>
                 <p>{this.props.user.first_name}-{this.props.user.last_name}</p>
               </div>
@@ -130,13 +134,15 @@ const mapStateToProps = state => {
   return {
     token: state.auth.token,
     user: state.auth.user,
+    form: state.exercise.form,
     loading: state.auth.loading
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    getUserDetail: token => dispatch(getUserDetail(token))
+    getUserDetail: token => dispatch(getUserDetail(token)),
+    fetchAllExerciseTable: (token, pk) => dispatch(fetchAllExerciseTable(token, pk))
   };
 };
 

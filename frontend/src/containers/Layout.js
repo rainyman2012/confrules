@@ -15,6 +15,7 @@ class CustomLayout extends React.Component {
   };
 
   componentDidMount() {
+    this.props.logout();
     document.body.style.fontFamily = "Amiri";
     let htmlElement = document.getElementsByTagName("html")[0];
     htmlElement.dir = "rtl";
@@ -37,6 +38,7 @@ class CustomLayout extends React.Component {
   render() {
     const general_texts = T[this.props.language];
     const { authenticated } = this.props;
+    console.log("this user is authenticated", authenticated);
 
     if (authenticated) {
       if (!this.props.user) {

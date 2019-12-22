@@ -26,7 +26,7 @@ const exerciseStart = (state, action) => {
 
 const exerciseSuccess = (state, action) => {
   return updateObject(state, {
-    uuid: action.uuid,
+    form: action.data,
     error: null,
     loading: false
   });
@@ -35,7 +35,7 @@ const exerciseSuccess = (state, action) => {
 const exerciseSuccessFetch = (state, action) => {
   return updateObject(state, {
     name: action.name,
-    uuid: action.uuid,
+    form: action.form,
     error: null,
     loading: false
   });

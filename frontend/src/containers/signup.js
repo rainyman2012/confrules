@@ -7,6 +7,7 @@ import AuthForm from "./signup_steps/auth";
 import PersonalForm from "./signup_steps/personal";
 import LanguageForm from "./signup_steps/language";
 import { authSignup, authProfile } from "../store/actions/auth";
+import { exerciseCreate } from "../store/actions/exercise";
 import { HOSTNAME } from "../static";
 import axios from "axios";
 
@@ -47,13 +48,16 @@ class SignUpForm extends React.Component {
   componentWillUpdate(nextProps, nextState) {
     if (this.props.token !== nextProps.token) {
       // gender, lang, age, image, key;
-      this.props.create_profile(
+      this.props.createProfile(
         this.state.gender,
         this.state.language,
         this.state.age,
         this.state.image,
         nextProps.token
       );
+
+      this.props.createEmptyExercise(nextProps.token);
+
       message.success("Your account successfully created.", () => {
         this.props.history.push("/");
       });
@@ -149,8 +153,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     create: (name, password1) => dispatch(authSignup(name, password1)),
-    create_profile: (gender, lang, age, image, key) =>
-      dispatch(authProfile(gender, lang, age, image, key))
+    createProfile: (gender, lang, age, image, key) =>
+      dispatch(authProfile(gender, lang, age, image, key)),
+    createEmptyExercise: (token) => dispatch(exerciseCreate(token))
   };
 };
 

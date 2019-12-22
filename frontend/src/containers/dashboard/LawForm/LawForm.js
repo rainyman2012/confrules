@@ -1,6 +1,6 @@
 import { Form, Select, Row, Col, Button } from "antd";
 import React from "react";
-import { addToForm } from "../../../store/actions/exercise";
+import { updateUserExerciseTable } from "../../../store/actions/exercise";
 import { connect } from "react-redux";
 
 import "./LawForm.css";
@@ -11,8 +11,9 @@ class LawForm extends React.Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        this.props.addToForm(values)
-        console.log("Received values of form: ", values);
+
+        this.props.updateUserExerciseTable(values, this.props.token, this.props.user.pk);
+        console.log("Received values of form: ", values, this.props.token, this.props.user.pk);
       }
     });
   };
@@ -24,7 +25,7 @@ class LawForm extends React.Component {
         <Col span={12} style={{ textAlign: "center", direction: "ltr" }}>
           <Form onSubmit={this.handleSubmit}>
             <Form.Item>
-              {getFieldDecorator("laws", {
+              {getFieldDecorator("law", {
                 rules: [
                   { required: true, message: "یکی از موارد را انتخاب کنید!" }
                 ]
@@ -56,13 +57,14 @@ const mapStateToProps = state => {
   return {
     loading: state.exercise.loading,
     error: state.exercise.error,
-    uuid: state.exercise.uuid
+    user: state.auth.user,
+    token: state.auth.token
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    addToForm: (data) => dispatch(addToForm(data)),
+    updateUserExerciseTable: (data, token, pk) => dispatch(updateUserExerciseTable(data, token, pk)),
   };
 };
 

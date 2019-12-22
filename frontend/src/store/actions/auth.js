@@ -124,13 +124,13 @@ export const authProfile = (gender, lang, age, image, key) => {
   };
 };
 
-export const getUserDetail = key => {
+export const getUserDetail = token => {
   return dispatch => {
     dispatch(authStart());
     axios
       .get(`${HOSTNAME}/auth/user/`, {
         headers: {
-          Authorization: "Token " + key
+          Authorization: "Token " + token
         }
       })
       .then(res => {

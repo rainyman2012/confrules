@@ -4,6 +4,7 @@ import { NavLink, Redirect } from "react-router-dom";
 import { authLogin } from "../../store/actions/auth";
 import { Form, Icon, Input, Button, Checkbox, Row, Col } from "antd";
 import "./Login.css";
+
 class LoginForm extends React.Component {
   state = {
     username: "",
@@ -41,7 +42,7 @@ class LoginForm extends React.Component {
 
     return (
       <Row type="flex" justify="center">
-        <Col>
+        <Col span={5}>
           <Form onSubmit={this.handleSubmit} className="login-form">
             <Form.Item>
               {getFieldDecorator("username", {
@@ -73,11 +74,6 @@ class LoginForm extends React.Component {
               )}
             </Form.Item>
             <Form.Item>
-              {getFieldDecorator("remember", {
-                valuePropName: "checked",
-                initialValue: true
-              })(<Checkbox>
-              </Checkbox>)}
               <Button
                 type="primary"
                 htmlType="submit"

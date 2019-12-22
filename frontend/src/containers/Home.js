@@ -3,7 +3,7 @@ import React, { Component } from "react";
 
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { fetchData, setGAClientId } from "../store/actions/exercise";
+import { setGAClientId } from "../store/actions/exercise";
 import { Lang as T } from "../languages";
 
 class HomepageLayout extends React.Component {
@@ -49,7 +49,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchData: uuid => dispatch(fetchData(uuid)),
+
     setClientId: clientId => dispatch(setGAClientId(clientId))
   };
 };
